@@ -1,0 +1,16 @@
+.link {
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: black;
+  border: 1px solid black;
+}
+
+.link:nth-child(1) {
+  margin-right: 15px;
+}
+
+.link_active {
+  color: aqua;
+  border: 1px solid aqua;
+}
