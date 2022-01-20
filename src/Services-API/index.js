@@ -1,1 +1,6 @@
-export { fetchMain, fetchSearchFilm, fetchMovieDetails } from './Api';
+export {
+  fetchMain,
+  fetchSearchFilm,
+  fetchMovieDetails,
+  fetchMovieCredits,
+} from './Api';

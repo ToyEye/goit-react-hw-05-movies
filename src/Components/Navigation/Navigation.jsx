@@ -1,6 +1,6 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-// import s from './Navigation.module.css';
+import { Container } from '../Container';
 
 const Nav = styled.nav`
   text-align: center;
@@ -22,11 +22,17 @@ const NavigationLink = styled(NavLink)`
   }
 `;
 
-export const Navigation = () => {
+export const Layout = () => {
   return (
-    <Nav>
-      <NavigationLink to="/">Home</NavigationLink>
-      <NavigationLink to="/movies">Movies</NavigationLink>
-    </Nav>
+    <>
+      <Nav>
+        <NavigationLink to="/">Home</NavigationLink>
+        <NavigationLink to="/movies">Movies</NavigationLink>
+      </Nav>
+
+      <Container>
+        <Outlet />
+      </Container>
+    </>
   );
 };

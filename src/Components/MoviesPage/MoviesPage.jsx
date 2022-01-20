@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { fetchSearchFilm } from '../../Services-API';
 import {
   FilmList,
@@ -47,19 +47,30 @@ export default function MoviesPage() {
       <Outlet />
       {searchFilms && (
         <FilmList>
-          {searchFilms.map(
-            ({ id, title, name, backdrop_path, vote_count, vote_average }) => (
-              <FilmItem key={id}>
-                <FilmText>{title ? title : name}</FilmText>
-                <FilmImages
-                  src={`https://image.tmdb.org/t/p/w300${backdrop_path}`}
-                  alt=""
-                />
-                <FilmText>Vote: {vote_count}</FilmText>
-                <FilmText>Average rating: {vote_average}</FilmText>
-              </FilmItem>
-            )
-          )}
+          <ul>
+            {searchFilms.map(
+              ({
+                id,
+                title,
+                name,
+                backdrop_path,
+                vote_count,
+                vote_average,
+              }) => (
+                <FilmItem key={id}>
+                  <Link to={`/movies/${id}`}>
+                    <FilmText>{title ? title : name}</FilmText>
+                    <FilmImages
+                      src={`https://image.tmdb.org/t/p/w300${backdrop_path}`}
+                      alt=""
+                    />
+                    <FilmText>Vote: {vote_count}</FilmText>
+                    <FilmText>Average rating: {vote_average}</FilmText>
+                  </Link>
+                </FilmItem>
+              )
+            )}
+          </ul>
         </FilmList>
       )}
     </>

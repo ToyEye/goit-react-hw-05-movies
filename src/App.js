@@ -1,23 +1,25 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Container } from './Components/Container';
-import { Navigation } from './Components/Navigation';
+import { Layout } from './Components/Navigation';
 import HomePage from './Components/HomePage';
 import MoviesPage from './Components/MoviesPage';
 import { MovieDetailsPage } from './Components/MovieDetailsPage';
+import { Cast } from './Components/Cast/Cast';
 
 export default function App() {
   return (
     <>
-      <Navigation />
-      <Container>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="movies" element={<MoviesPage />}>
-            <Route path=":moviesId" element={<MovieDetailsPage />} />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="movies/" element={<MoviesPage />}>
+            <Route path=":moviesId" element={<MovieDetailsPage />}>
+              <Route path="cast" element={<Cast />} />
+              <Route path="reviews" />
+            </Route>
           </Route>
-        </Routes>
-      </Container>
+        </Route>
+      </Routes>
     </>
   );
 }
