@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import PropTypes from 'prop-types';
 axios.defaults.baseURL = 'https://api.themoviedb.org/';
 const KEY = 'c031fb300fb5fade2c7c769ccf51c6f2';
 
@@ -16,11 +16,18 @@ export const fetchSearchFilm = async search => {
   return response.data;
 };
 
+fetchSearchFilm.propTypes = {
+  search: PropTypes.string.isRequired,
+};
+
 export const fetchMovieDetails = async id => {
   const response = await axios.get(
     `3/movie/${id}?api_key=${KEY}&language=en-US`
   );
   return response.data;
+};
+fetchMovieDetails.propTypes = {
+  id: PropTypes.number.isRequired,
 };
 
 export const fetchAboutMovie = async (id, about) => {
@@ -28,4 +35,9 @@ export const fetchAboutMovie = async (id, about) => {
     `3/movie/${id}/${about}?api_key=${KEY}&language=en-US&page=1`
   );
   return response.data;
+};
+
+fetchAboutMovie.propTypes = {
+  id: PropTypes.number.isRequired,
+  about: PropTypes.string.isRequired,
 };
