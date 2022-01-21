@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams, NavLink, Outlet } from 'react-router-dom';
-import { fetchMovieDetails } from '../../Services-API';
+import { fetchMovieDetails } from '../Services-API/';
 
 const Section = styled.section`
   display: flex;
@@ -59,6 +59,7 @@ const Links = styled(NavLink)`
 export const MovieDetailsPage = () => {
   const [oneFilmObject, setOneFilmObject] = useState({});
   let { moviesId } = useParams();
+
   useEffect(() => {
     const oneMovie = async () => {
       await fetchMovieDetails(moviesId).then(data => {

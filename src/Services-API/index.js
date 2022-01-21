@@ -2,5 +2,5 @@ export {
   fetchMain,
   fetchSearchFilm,
   fetchMovieDetails,
-  fetchMovieCredits,
+  fetchAboutMovie,
 } from './Api';

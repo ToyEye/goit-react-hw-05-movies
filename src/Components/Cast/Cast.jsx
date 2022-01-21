@@ -1,30 +1,44 @@
 import { useEffect, useState } from 'react';
-import { fetchMovieCredits } from '../../Services-API/Api';
+import { useParams } from 'react-router-dom';
+import { fetchAboutMovie } from '../../Services-API/Api';
+import { FilmList, FilmText } from '../Components/';
+
 export const Cast = () => {
   const [actors, setActors] = useState([]);
+  const { moviesId } = useParams();
 
   useEffect(() => {
     const fetch = async () => {
-      await fetchMovieCredits(312).then(data => setActors(data.cast));
+      await fetchAboutMovie(moviesId, 'credits').then(data =>
+        setActors(data.cast)
+      );
     };
     fetch();
-  });
+  }, [moviesId]);
 
   return (
     <>
-      <ul>
+      <FilmList>
         {actors &&
           actors.map(({ character, name, profile_path, id }) => (
             <li key={id}>
-              <img
-                src={`https://image.tmdb.org/t/p/w300${profile_path}`}
-                alt=""
-              />
-              <p>{character}</p>
-              <p>{name}</p>
+              {profile_path ? (
+                <img
+                  src={`https://image.tmdb.org/t/p/w300${profile_path}`}
+                  alt=""
+                />
+              ) : (
+                <img
+                  src={`https://ik.imagekit.io/tc8jxffbcvf/default-movie-portrait_EmJUj9Tda5wa.jpg?tr=fo-auto,di-`}
+                  alt=""
+                  width="300px"
+                />
+              )}
+              <FilmText>{character}</FilmText>
+              <FilmText>{name}</FilmText>
             </li>
           ))}
-      </ul>
+      </FilmList>
     </>
   );
 };

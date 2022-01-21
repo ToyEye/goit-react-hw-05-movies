@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import { fetchSearchFilm } from '../../Services-API';
+import { Outlet } from 'react-router-dom';
+import { fetchSearchFilm } from '../Services-API/';
 import {
   FilmList,
   FilmItem,
@@ -9,7 +9,8 @@ import {
   Form,
   FormInput,
   Button,
-} from '../Components/';
+  LinkStyled,
+} from '../Components/Components';
 
 export default function MoviesPage() {
   const [search, setSearch] = useState('');
@@ -58,15 +59,24 @@ export default function MoviesPage() {
                 vote_average,
               }) => (
                 <FilmItem key={id}>
-                  <Link to={`/movies/${id}`}>
+                  <LinkStyled to={`/movies/${id}`}>
                     <FilmText>{title ? title : name}</FilmText>
-                    <FilmImages
-                      src={`https://image.tmdb.org/t/p/w300${backdrop_path}`}
-                      alt=""
-                    />
+                    {backdrop_path ? (
+                      <FilmImages
+                        src={`https://image.tmdb.org/t/p/w300${backdrop_path}`}
+                        alt=""
+                      />
+                    ) : (
+                      <FilmImages
+                        src={`https://ik.imagekit.io/tc8jxffbcvf/default-movie-portrait_EmJUj9Tda5wa.jpg?tr=fo-auto,di-`}
+                        alt=""
+                        width="300px"
+                      />
+                    )}
+
                     <FilmText>Vote: {vote_count}</FilmText>
                     <FilmText>Average rating: {vote_average}</FilmText>
-                  </Link>
+                  </LinkStyled>
                 </FilmItem>
               )
             )}

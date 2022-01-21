@@ -1,25 +1,29 @@
-import React from 'react';
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from './Components/Navigation';
-import HomePage from './Components/HomePage';
-import MoviesPage from './Components/MoviesPage';
-import { MovieDetailsPage } from './Components/MovieDetailsPage';
-import { Cast } from './Components/Cast/Cast';
+import { LoaderSimbol } from './Components/Loader';
+const HomePage = lazy(() => import('./Pages/HomePage'));
+const MoviesPage = lazy(() => import('./Pages/MoviesPage'));
+const MovieDetailsPage = lazy(() => import('./Pages/MovieDetailsPage'));
+const Cast = lazy(() => import('./Components/Cast/Cast'));
+const Reviews = lazy(() => import('./Components/Reviews'));
 
 export default function App() {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="movies/" element={<MoviesPage />}>
+      <Suspense fallback={<LoaderSimbol />}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+
+            <Route path="movies/" element={<MoviesPage />} />
             <Route path=":moviesId" element={<MovieDetailsPage />}>
               <Route path="cast" element={<Cast />} />
-              <Route path="reviews" />
+              <Route path="reviews" element={<Reviews />} />
             </Route>
           </Route>
-        </Route>
-      </Routes>
+        </Routes>
+      </Suspense>
     </>
   );
 }

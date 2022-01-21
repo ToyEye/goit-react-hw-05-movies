@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
-import { fetchMain } from '../../Services-API/';
-import { FilmList, FilmItem, FilmText, FilmImages } from '../Components/';
+import { fetchMain } from '../Services-API';
+import {
+  FilmList,
+  FilmItem,
+  FilmText,
+  FilmImages,
+  MainTitle,
+  LinkStyled,
+} from '../Components/Components';
 
 export default function HomePage() {
   const [films, setFilms] = useState([]);
@@ -16,11 +21,12 @@ export default function HomePage() {
 
   return (
     <article>
+      <MainTitle>Trending today</MainTitle>
       <FilmList>
         {films.map(
           ({ id, title, name, backdrop_path, vote_count, vote_average }) => (
             <FilmItem key={id}>
-              <Link to={`/movies/${id}`}>
+              <LinkStyled to={`/movies/${id}`}>
                 <FilmText>{title ? title : name}</FilmText>
                 <FilmImages
                   src={`https://image.tmdb.org/t/p/w300${backdrop_path}`}
@@ -28,7 +34,7 @@ export default function HomePage() {
                 />
                 <FilmText>Vote: {vote_count}</FilmText>
                 <FilmText>Average rating: {vote_average}</FilmText>
-              </Link>
+              </LinkStyled>
             </FilmItem>
           )
         )}

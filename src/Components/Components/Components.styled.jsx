@@ -1,10 +1,20 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+const MainTitle = styled.h1`
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+`;
 
 const FilmList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  text-align: center;
+`;
+const LinkStyled = styled(Link)`
+  color: black;
+  text-decoration: none;
 `;
 
 const FilmItem = styled.li`
@@ -13,6 +23,7 @@ const FilmItem = styled.li`
   width: 350px;
   transform: scale(1);
   transition: transform 250ms linear;
+  text-align: center;
   box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   :hover,
   :focus {
@@ -48,4 +59,14 @@ const Button = styled.button`
   background-color: #fff;
 `;
 
-export { FilmList, FilmItem, FilmText, FilmImages, Form, FormInput, Button };
+export {
+  FilmList,
+  FilmItem,
+  FilmText,
+  FilmImages,
+  Form,
+  FormInput,
+  Button,
+  MainTitle,
+  LinkStyled,
+};
