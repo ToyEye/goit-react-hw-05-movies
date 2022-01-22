@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from './Components/Navigation';
 import { LoaderSimbol } from './Components/Loader';
+
 const HomePage = lazy(() => import('./Pages/HomePage'));
 const MoviesPage = lazy(() => import('./Pages/MoviesPage'));
 const MovieDetailsPage = lazy(() => import('./Pages/MovieDetailsPage'));
@@ -16,11 +17,12 @@ export default function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
 
-            <Route path="movies/*" element={<MoviesPage />} />
-            <Route path=":moviesId" element={<MovieDetailsPage />}>
+            <Route path="movies" element={<MoviesPage />} />
+            <Route path="movies/:moviesId" element={<MovieDetailsPage />}>
               <Route path="cast" element={<Cast />} />
               <Route path="reviews" element={<Reviews />} />
             </Route>
+            <Route path="*" element={HomePage} />
           </Route>
         </Routes>
       </Suspense>

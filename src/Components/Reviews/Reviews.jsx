@@ -13,7 +13,7 @@ const Attention = styled.div`
   margin-right: auto;
 `;
 
-export const Reviews = () => {
+export default function Reviews() {
   const [reviews, setReviews] = useState([]);
   const { moviesId } = useParams();
 
@@ -25,21 +25,22 @@ export const Reviews = () => {
     };
     fetch();
   }, [moviesId]);
+
+  if (reviews.length === 0) {
+    return <Attention>We dont have any reviews for this movie</Attention>;
+  }
   return (
     <>
-      {reviews ? (
-        <FilmList>
-          {reviews.map(revie => (
-            <li key={revie.id}>
-              <FilmText>Author</FilmText>
-              {revie.author}
-              <FilmText>{revie.content}</FilmText>
-            </li>
-          ))}
-        </FilmList>
-      ) : (
-        <Attention>No Reviews</Attention>
-      )}
+      <FilmList>
+        {reviews.map(revie => (
+          <li key={revie.id}>
+            <FilmText>Author</FilmText>
+            {revie.author}
+            <FilmText>{revie.content}</FilmText>
+          </li>
+        ))}
+      </FilmList>
+      )
     </>
   );
-};
+}

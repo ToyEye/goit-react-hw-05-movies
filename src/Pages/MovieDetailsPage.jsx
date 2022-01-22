@@ -56,7 +56,7 @@ const Links = styled(NavLink)`
   }
 `;
 
-export const MovieDetailsPage = () => {
+export default function MovieDetailsPage() {
   const [oneFilmObject, setOneFilmObject] = useState({});
   let { moviesId } = useParams();
 
@@ -100,4 +100,4 @@ export const MovieDetailsPage = () => {
       </Section>
     </>
   );
-};
+}

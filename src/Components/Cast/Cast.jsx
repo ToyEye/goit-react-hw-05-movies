@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { fetchAboutMovie } from '../../Services-API/Api';
 import { FilmList, FilmText } from '../Components/';
 
-export const Cast = () => {
+export default function Cast() {
   const [actors, setActors] = useState([]);
   const { moviesId } = useParams();
 
@@ -41,4 +41,4 @@ export const Cast = () => {
       </FilmList>
     </>
   );
-};
+}

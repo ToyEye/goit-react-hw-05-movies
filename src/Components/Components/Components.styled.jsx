@@ -38,6 +38,7 @@ const FilmText = styled.p`
 const FilmImages = styled.img`
   margin-right: auto;
   margin-left: auto;
+  width: 300px;
 `;
 
 const Form = styled.form`

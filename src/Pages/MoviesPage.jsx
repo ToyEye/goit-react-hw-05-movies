@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { fetchSearchFilm } from '../Services-API/';
 import {
   FilmList,
@@ -16,7 +16,7 @@ export default function MoviesPage() {
   const [search, setSearch] = useState('');
   const [searchSubmit, setSearchSubmit] = useState('');
   const [searchFilms, setSearchFilms] = useState([]);
-
+  const local = useLocation();
   useEffect(() => {
     if (searchSubmit === '') {
       return;
@@ -48,39 +48,27 @@ export default function MoviesPage() {
       <Outlet />
       {searchFilms && (
         <FilmList>
-          <ul>
-            {searchFilms.map(
-              ({
-                id,
-                title,
-                name,
-                backdrop_path,
-                vote_count,
-                vote_average,
-              }) => (
-                <FilmItem key={id}>
-                  <LinkStyled to={`/movies/${id}`}>
-                    <FilmText>{title ? title : name}</FilmText>
-                    {backdrop_path ? (
-                      <FilmImages
-                        src={`https://image.tmdb.org/t/p/w300${backdrop_path}`}
-                        alt=""
-                      />
-                    ) : (
-                      <FilmImages
-                        src={`https://ik.imagekit.io/tc8jxffbcvf/default-movie-portrait_EmJUj9Tda5wa.jpg?tr=fo-auto,di-`}
-                        alt=""
-                        width="300px"
-                      />
-                    )}
+          {searchFilms.map(
+            ({ id, title, name, backdrop_path, vote_count, vote_average }) => (
+              <FilmItem key={id}>
+                <LinkStyled to={`/${local.pathname}/${id}`}>
+                  <FilmText>{title ? title : name}</FilmText>
 
-                    <FilmText>Vote: {vote_count}</FilmText>
-                    <FilmText>Average rating: {vote_average}</FilmText>
-                  </LinkStyled>
-                </FilmItem>
-              )
-            )}
-          </ul>
+                  <FilmImages
+                    src={
+                      backdrop_path
+                        ? `https://image.tmdb.org/t/p/w300${backdrop_path}`
+                        : `https://ik.imagekit.io/tc8jxffbcvf/default-movie-portrait_EmJUj9Tda5wa.jpg?tr=fo-auto,di-`
+                    }
+                    alt=""
+                  />
+
+                  <FilmText>Vote: {vote_count}</FilmText>
+                  <FilmText>Average rating: {vote_average}</FilmText>
+                </LinkStyled>
+              </FilmItem>
+            )
+          )}
         </FilmList>
       )}
     </>
