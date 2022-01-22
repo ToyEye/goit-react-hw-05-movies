@@ -67,11 +67,12 @@ export default function MovieDetailsPage() {
       });
     };
     oneMovie();
-  }, [moviesId]);
+  });
 
   const { title, vote_average, overview, genres, poster_path } = oneFilmObject;
   return (
     <>
+      <Links to="/">Return to movies</Links>
       <Section>
         <OneFilmImg
           src={`https://image.tmdb.org/t/p/w300${poster_path}`}
