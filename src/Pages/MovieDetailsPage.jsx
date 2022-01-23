@@ -1,7 +1,14 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useParams, NavLink, Outlet } from 'react-router-dom';
+import {
+  useParams,
+  NavLink,
+  Outlet,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
 import { fetchMovieDetails } from '../Services-API/';
+import { Button } from '../Components/Components';
 
 const Section = styled.section`
   display: flex;
@@ -59,6 +66,8 @@ const Links = styled(NavLink)`
 export default function MovieDetailsPage() {
   const [oneFilmObject, setOneFilmObject] = useState({});
   let { moviesId } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const oneMovie = async () => {
@@ -69,10 +78,16 @@ export default function MovieDetailsPage() {
     oneMovie();
   });
 
+  function onGoBack() {
+    navigate(location?.state?.from ?? '/');
+  }
+
   const { title, vote_average, overview, genres, poster_path } = oneFilmObject;
   return (
     <>
-      <Links to="/">Return to movies</Links>
+      <Button onClick={onGoBack} type="button">
+        Return to movies
+      </Button>
       <Section>
         <OneFilmImg
           src={`https://image.tmdb.org/t/p/w300${poster_path}`}
