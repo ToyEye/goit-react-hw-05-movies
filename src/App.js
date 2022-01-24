@@ -3,9 +3,11 @@ import { Routes, Route } from 'react-router-dom';
 import { Layout } from './Components/Navigation';
 import { LoaderSimbol } from './Components/Loader';
 
-const HomePage = lazy(() => import('./Pages/HomePage'));
-const MoviesPage = lazy(() => import('./Pages/MoviesPage'));
-const MovieDetailsPage = lazy(() => import('./Pages/MovieDetailsPage'));
+const HomePage = lazy(() => import('./Pages/HomePage/HomePage'));
+const MoviesPage = lazy(() => import('./Pages/MoviePage/MoviesPage'));
+const MovieDetailsPage = lazy(() =>
+  import('./Pages/MovieDetailsPage/MovieDetailsPage')
+);
 const Cast = lazy(() => import('./Components/Cast/Cast'));
 const Reviews = lazy(() => import('./Components/Reviews'));
 

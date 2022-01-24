@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { fetchSearchFilm } from '../Services-API/';
+import { fetchSearchFilm } from '../../Services-API';
 import {
   FilmList,
   FilmItem,
@@ -10,7 +10,7 @@ import {
   FormInput,
   Button,
   LinkStyled,
-} from '../Components/Components';
+} from '../../Components/Components';
 
 export default function MoviesPage() {
   const [search, setSearch] = useState('');
@@ -56,9 +56,7 @@ export default function MoviesPage() {
           {searchFilms.map(
             ({ id, title, name, backdrop_path, vote_count, vote_average }) => (
               <FilmItem key={id}>
-                <LinkStyled
-                  to={{ pathname: `/movies/${id}`, state: { from: location } }}
-                >
+                <LinkStyled to={`/movies/${id}`} state={{ from: location }}>
                   <FilmText>{title ? title : name}</FilmText>
 
                   <FilmImages

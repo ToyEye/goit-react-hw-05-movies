@@ -7,46 +7,20 @@ import {
   useNavigate,
   useLocation,
 } from 'react-router-dom';
-import { fetchMovieDetails } from '../Services-API/';
-import { Button } from '../Components/Components';
+import { fetchMovieDetails } from '../../Services-API';
+import {
+  Section,
+  OneFilmImg,
+  FilmName,
+  OneFilmInfoContainer,
+  Paragraph,
+  AboutTitle,
+  GenresTitle,
+  GenresList,
+  GenresItem,
+} from './MovieDetailsPage.styled';
+import { Button } from '../../Components/Components';
 
-const Section = styled.section`
-  display: flex;
-  margin-top: 15px;
-`;
-
-const OneFilmImg = styled.img`
-  width: 400px;
-`;
-const FilmName = styled.h2`
-  font-size: 26px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-`;
-const OneFilmInfoContainer = styled.div`
-  margin-right: 15px;
-  margin-left: 15px;
-`;
-const Paragraph = styled.div`
-  margin-bottom: 15px;
-`;
-
-const AboutTitle = styled.h3`
-  margin-bottom: 20px;
-`;
-
-const GenresTitle = styled.h4`
-  margin-bottom: 20px;
-`;
-
-const GenresList = styled.ul`
-  display: flex;
-`;
-
-const GenresItem = styled.li`
-  font-weight: 600;
-  margin-right: 7px;
-`;
 const Links = styled(NavLink)`
   text-decoration: none;
   border: 1px solid black;
@@ -69,7 +43,7 @@ export default function MovieDetailsPage() {
   let { moviesId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
+
   useEffect(() => {
     const oneMovie = async () => {
       await fetchMovieDetails(moviesId).then(data => {
@@ -79,10 +53,15 @@ export default function MovieDetailsPage() {
     oneMovie();
   }, [moviesId]);
 
+  function onGoBack() {
+    navigate(location?.state?.from ?? '/');
+  }
+
   const { title, vote_average, overview, genres, poster_path } = oneFilmObject;
   return (
     <>
-      <Button onClick={() => navigate(-1)} type="button">
+      <Button onClick={onGoBack} type="button">
+        {/* <Button onClick={() => navigate(-1)} type="button"> */}
         Return to movies
       </Button>
       <Section>
