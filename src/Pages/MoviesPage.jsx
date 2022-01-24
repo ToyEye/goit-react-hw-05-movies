@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { fetchSearchFilm } from '../Services-API/';
 import {
   FilmList,
@@ -16,6 +16,9 @@ export default function MoviesPage() {
   const [search, setSearch] = useState('');
   const [searchSubmit, setSearchSubmit] = useState('');
   const [searchFilms, setSearchFilms] = useState([]);
+  const navigate = useNavigate();
+  const location = useLocation();
+  // const currentQuery = new URLSearchParams(location.search).get('query');
 
   useEffect(() => {
     if (searchSubmit === '') {
@@ -36,6 +39,8 @@ export default function MoviesPage() {
   const handleSubmit = evt => {
     evt.preventDefault();
     setSearchSubmit(search);
+
+    navigate({ ...location, search: `query=${search}` });
     setSearch('');
   };
 
@@ -51,7 +56,9 @@ export default function MoviesPage() {
           {searchFilms.map(
             ({ id, title, name, backdrop_path, vote_count, vote_average }) => (
               <FilmItem key={id}>
-                <LinkStyled to={`/movies/${id}`}>
+                <LinkStyled
+                  to={{ pathname: `/movies/${id}`, state: { from: location } }}
+                >
                   <FilmText>{title ? title : name}</FilmText>
 
                   <FilmImages

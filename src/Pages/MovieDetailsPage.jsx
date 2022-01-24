@@ -65,10 +65,11 @@ const Links = styled(NavLink)`
 
 export default function MovieDetailsPage() {
   const [oneFilmObject, setOneFilmObject] = useState({});
+
   let { moviesId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-
+  console.log(location);
   useEffect(() => {
     const oneMovie = async () => {
       await fetchMovieDetails(moviesId).then(data => {
@@ -76,16 +77,12 @@ export default function MovieDetailsPage() {
       });
     };
     oneMovie();
-  });
-
-  function onGoBack() {
-    navigate(location?.state?.from ?? '/');
-  }
+  }, [moviesId]);
 
   const { title, vote_average, overview, genres, poster_path } = oneFilmObject;
   return (
     <>
-      <Button onClick={onGoBack} type="button">
+      <Button onClick={() => navigate(-1)} type="button">
         Return to movies
       </Button>
       <Section>
@@ -108,8 +105,12 @@ export default function MovieDetailsPage() {
         </OneFilmInfoContainer>
       </Section>
       <Section>
-        <Links to={`/movies/${moviesId}/cast`}>Cast</Links>
-        <Links to={`/movies/${moviesId}/reviews `}>Reviews</Links>
+        <Links to={`/movies/${moviesId}/cast`} state={{ from: location }}>
+          Cast
+        </Links>
+        <Links to={`/movies/${moviesId}/reviews `} state={{ from: location }}>
+          Reviews
+        </Links>
       </Section>
       <Section>
         <Outlet />
