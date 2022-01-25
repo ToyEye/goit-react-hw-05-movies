@@ -61,7 +61,6 @@ export default function MovieDetailsPage() {
   return (
     <>
       <Button onClick={onGoBack} type="button">
-        {/* <Button onClick={() => navigate(-1)} type="button"> */}
         Return to movies
       </Button>
       <Section>

@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Outlet, useNavigate, useLocation } from 'react-router-dom';
+import { useState, useEffect, useLayoutEffect } from 'react';
+import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { fetchSearchFilm } from '../../Services-API';
 import {
   FilmList,
@@ -16,11 +16,20 @@ export default function MoviesPage() {
   const [search, setSearch] = useState('');
   const [searchSubmit, setSearchSubmit] = useState('');
   const [searchFilms, setSearchFilms] = useState([]);
-  const navigate = useNavigate();
+  const [searchParam, setSearchParam] = useSearchParams();
+
   const location = useLocation();
-  // const currentQuery = new URLSearchParams(location.search).get('query');
 
   useEffect(() => {
+    if (searchParam.has('query')) {
+      setSearchSubmit(searchParam.get('query'));
+    }
+    return () => {
+      setSearchFilms([]);
+    };
+  }, [searchParam]);
+
+  useLayoutEffect(() => {
     if (searchSubmit === '') {
       return;
     }
@@ -40,7 +49,7 @@ export default function MoviesPage() {
     evt.preventDefault();
     setSearchSubmit(search);
 
-    navigate({ ...location, search: `query=${search}` });
+    setSearchParam({ query: search });
     setSearch('');
   };
 
