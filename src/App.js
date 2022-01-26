@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './Components/Navigation';
 import { LoaderSimbol } from './Components/Loader';
 
@@ -24,7 +24,7 @@ export default function App() {
               <Route path="cast" element={<Cast />} />
               <Route path="reviews" element={<Reviews />} />
             </Route>
-            <Route path="*" element={<HomePage />} />
+            <Route path="*" element={<Navigate to="/" replace={true} />} />
           </Route>
         </Routes>
       </Suspense>

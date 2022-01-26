@@ -1,12 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import {
-  useParams,
-  NavLink,
-  Outlet,
-  useNavigate,
-  useLocation,
-} from 'react-router-dom';
+import { useParams, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { fetchMovieDetails } from '../../Services-API';
 import {
   Section,
@@ -19,7 +13,6 @@ import {
   GenresList,
   GenresItem,
 } from './MovieDetailsPage.styled';
-import { Button } from '../../Components/Components';
 
 const Links = styled(NavLink)`
   text-decoration: none;
@@ -41,8 +34,9 @@ export default function MovieDetailsPage() {
   const [oneFilmObject, setOneFilmObject] = useState({});
 
   let { moviesId } = useParams();
-  const navigate = useNavigate();
+
   const location = useLocation();
+  const cameFrom = location?.state?.from ?? '/';
 
   useEffect(() => {
     const oneMovie = async () => {
@@ -53,16 +47,10 @@ export default function MovieDetailsPage() {
     oneMovie();
   }, [moviesId]);
 
-  function onGoBack() {
-    navigate(location?.state?.from ?? '/');
-  }
-
   const { title, vote_average, overview, genres, poster_path } = oneFilmObject;
   return (
     <>
-      <Button onClick={onGoBack} type="button">
-        Return to movies
-      </Button>
+      <Links to={cameFrom}>Return to movies</Links>
       <Section>
         <OneFilmImg
           src={`https://image.tmdb.org/t/p/w300${poster_path}`}
@@ -83,10 +71,10 @@ export default function MovieDetailsPage() {
         </OneFilmInfoContainer>
       </Section>
       <Section>
-        <Links to={`/movies/${moviesId}/cast`} state={{ from: location }}>
+        <Links to={`/movies/${moviesId}/cast`} state={{ from: cameFrom }}>
           Cast
         </Links>
-        <Links to={`/movies/${moviesId}/reviews `} state={{ from: location }}>
+        <Links to={`/movies/${moviesId}/reviews `} state={{ from: cameFrom }}>
           Reviews
         </Links>
       </Section>
