@@ -1,35 +1,33 @@
-import { useState, useEffect, useLayoutEffect } from 'react';
-import { Outlet, useSearchParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 import { fetchSearchFilm } from '../../Services-API';
 import { Form, FormInput, Button } from '../../Components/Components';
 import FilmList from '../../Components/FilmList/FilmList';
 
 export default function MoviesPage() {
   const [search, setSearch] = useState('');
-  const [searchSubmit, setSearchSubmit] = useState('');
   const [searchFilms, setSearchFilms] = useState([]);
-  const [searchParam, setSearchParam] = useSearchParams();
+  const [searchParam, setSearchParam] = useState('');
 
   useEffect(() => {
-    if (searchParam.has('query')) {
-      setSearchSubmit(searchParam.get('query'));
+    const searchFilm = async () => {
+      try {
+        const data = await fetchSearchFilm(searchParam);
+        setSearchFilms(data.results);
+      } catch (error) {
+        console.log(error);
+        setSearchFilms([]);
+      }
+    };
+
+    if (searchParam) {
+      searchFilm();
     }
+
     return () => {
       setSearchFilms([]);
     };
   }, [searchParam]);
-
-  useLayoutEffect(() => {
-    if (searchSubmit === '') {
-      return;
-    }
-    const searchFilm = async () => {
-      await fetchSearchFilm(searchSubmit).then(data =>
-        setSearchFilms(data.results)
-      );
-    };
-    searchFilm();
-  }, [searchSubmit]);
 
   const handleSearch = evt => {
     setSearch(evt.target.value);
@@ -37,9 +35,11 @@ export default function MoviesPage() {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    setSearchSubmit(search);
 
-    setSearchParam({ query: search });
+    if (search.trim() !== '') {
+      setSearchParam(search);
+    }
+
     setSearch('');
   };
 

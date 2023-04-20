@@ -53,7 +53,11 @@ export default function MovieDetailsPage() {
       <Links to={cameFrom}>Return to movies</Links>
       <Section>
         <OneFilmImg
-          src={`https://image.tmdb.org/t/p/w300${poster_path}`}
+          src={
+            poster_path
+              ? `https://image.tmdb.org/t/p/w300${poster_path}`
+              : `https://ik.imagekit.io/tc8jxffbcvf/default-movie-portrait_EmJUj9Tda5wa.jpg?tr=fo-auto,di-`
+          }
           alt=""
         />
         <OneFilmInfoContainer>
