@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchAboutMovie } from '../../Services-API/Api';
-import { FilmList, FilmText } from '../Components/';
+import { FilmListStyled, FilmText } from '../Components/';
 
 export default function Cast() {
   const [actors, setActors] = useState([]);
@@ -18,7 +18,7 @@ export default function Cast() {
 
   return (
     <>
-      <FilmList>
+      <FilmListStyled>
         {actors &&
           actors.map(({ character, name, profile_path, id }) => (
             <li key={id}>
@@ -38,7 +38,7 @@ export default function Cast() {
               <FilmText>{name}</FilmText>
             </li>
           ))}
-      </FilmList>
+      </FilmListStyled>
     </>
   );
 }

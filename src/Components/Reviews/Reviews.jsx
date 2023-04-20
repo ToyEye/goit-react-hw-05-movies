@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 
 import { fetchAboutMovie } from '../../Services-API/Api';
-import { FilmList, FilmText } from '../Components/';
+import { FilmListStyled, FilmText } from '../Components/';
 
 const Attention = styled.div`
   font-size: 18px;
@@ -31,7 +31,7 @@ export default function Reviews() {
   }
   return (
     <>
-      <FilmList>
+      <FilmListStyled>
         {reviews.map(revie => (
           <li key={revie.id}>
             <FilmText>Author</FilmText>
@@ -39,7 +39,7 @@ export default function Reviews() {
             <FilmText>{revie.content}</FilmText>
           </li>
         ))}
-      </FilmList>
+      </FilmListStyled>
       )
     </>
   );

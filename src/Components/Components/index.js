@@ -1,5 +1,5 @@
 export {
-  FilmList,
+  FilmListStyled,
   FilmItem,
   FilmText,
   FilmImages,

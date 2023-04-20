@@ -7,7 +7,7 @@ const MainTitle = styled.h1`
   margin-bottom: 20px;
 `;
 
-const FilmList = styled.ul`
+const FilmListStyled = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -25,6 +25,7 @@ const FilmItem = styled.li`
   transition: transform 250ms linear;
   text-align: center;
   box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+
   :hover,
   :focus {
     transform: scale(1.03);
@@ -39,6 +40,7 @@ const FilmImages = styled.img`
   margin-right: auto;
   margin-left: auto;
   width: 300px;
+  height: 169px;
 `;
 
 const Form = styled.form`
@@ -61,7 +63,7 @@ const Button = styled.button`
 `;
 
 export {
-  FilmList,
+  FilmListStyled,
   FilmItem,
   FilmText,
   FilmImages,
