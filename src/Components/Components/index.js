@@ -3,7 +3,7 @@ export {
   FilmItem,
   FilmText,
   FilmImages,
-  Form,
+  FormStyled,
   FormInput,
   MainTitle,
   Button,

@@ -43,7 +43,7 @@ const FilmImages = styled.img`
   height: 169px;
 `;
 
-const Form = styled.form`
+const FormStyled = styled.form`
   text-align: center;
   margin-top: 15px;
   margin-bottom: 20px;
@@ -71,7 +71,7 @@ export {
   FilmItem,
   FilmText,
   FilmImages,
-  Form,
+  FormStyled,
   FormInput,
   Button,
   MainTitle,
