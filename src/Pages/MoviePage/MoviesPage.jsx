@@ -21,12 +21,11 @@ export default function MoviesPage() {
         setSearchFilms(data.results);
       } catch (error) {
         console.log(error);
-        setSearchFilms([]);
       }
     };
 
     searchFilm();
-  }, [searchFilms, searchParams]);
+  }, [searchParams]);
 
   const handleFormSubmit = handleSearch => {
     setSearchParams({ query: handleSearch });
