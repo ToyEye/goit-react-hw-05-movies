@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useSearchParams } from 'react-router-dom';
 import { fetchSearchFilm } from '../../Services-API';
 import { Form, FormInput, Button } from '../../Components/Components';
 import FilmList from '../../Components/FilmList/FilmList';
@@ -7,27 +7,29 @@ import FilmList from '../../Components/FilmList/FilmList';
 export default function MoviesPage() {
   const [search, setSearch] = useState('');
   const [searchFilms, setSearchFilms] = useState([]);
-  const [searchParam, setSearchParam] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams('');
 
   useEffect(() => {
-    const searchFilm = async () => {
-      try {
-        const data = await fetchSearchFilm(searchParam);
-        setSearchFilms(data.results);
-      } catch (error) {
-        console.log(error);
-        setSearchFilms([]);
-      }
-    };
+    if (searchParams.has('query')) {
+      const searchFilm = async () => {
+        try {
+          const data = await fetchSearchFilm(searchParams.get('query'));
+          setSearchFilms(data.results);
+        } catch (error) {
+          console.log(error);
+          setSearchFilms([]);
+        }
+      };
 
-    if (searchParam) {
-      searchFilm();
+      if (searchParams) {
+        searchFilm();
+      }
     }
 
     return () => {
       setSearchFilms([]);
     };
-  }, [searchParam]);
+  }, [searchParams]);
 
   const handleSearch = evt => {
     setSearch(evt.target.value);
@@ -37,7 +39,7 @@ export default function MoviesPage() {
     evt.preventDefault();
 
     if (search.trim() !== '') {
-      setSearchParam(search);
+      setSearchParams({ query: search });
     }
 
     setSearch('');
