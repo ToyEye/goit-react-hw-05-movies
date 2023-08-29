@@ -1,43 +1,31 @@
 import axios from 'axios';
-import PropTypes from 'prop-types';
-axios.defaults.baseURL = 'https://api.themoviedb.org/';
-const KEY = 'c031fb300fb5fade2c7c769ccf51c6f2';
+
+axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
+axios.defaults.params = {
+  language: 'en-US',
+  include_adult: true,
+  api_key: 'c031fb300fb5fade2c7c769ccf51c6f2',
+};
 
 export const fetchMain = async () => {
-  const URL = '3/trending/all/day?api_key=';
-  const response = await axios.get(`${URL}${KEY}`);
+  const URL = `trending/all/day`;
+  const { data } = await axios.get(URL);
 
-  return response.data;
+  return data;
 };
 
 export const fetchSearchFilm = async search => {
-  const URL = '3/search/movie?language=en-US&include_adult=false&api_key=';
-  const response = await axios.get(`${URL}${KEY}&query=${search}`);
-  return response.data;
-};
-
-fetchSearchFilm.propTypes = {
-  search: PropTypes.string.isRequired,
+  const URL = 'search/movie?';
+  const { data } = await axios.get(`${URL}&query=${search}`);
+  return data;
 };
 
 export const fetchMovieDetails = async id => {
-  const response = await axios.get(
-    `3/movie/${id}?api_key=${KEY}&language=en-US`
-  );
-  return response.data;
-};
-fetchMovieDetails.propTypes = {
-  id: PropTypes.number.isRequired,
+  const { data } = await axios.get(`movie/${id}`);
+  return data;
 };
 
 export const fetchAboutMovie = async (id, about) => {
-  const response = await axios.get(
-    `3/movie/${id}/${about}?api_key=${KEY}&language=en-US&page=1`
-  );
-  return response.data;
-};
-
-fetchAboutMovie.propTypes = {
-  id: PropTypes.number.isRequired,
-  about: PropTypes.string.isRequired,
+  const { data } = await axios.get(`movie/${id}/${about}?&page=1`);
+  return data;
 };

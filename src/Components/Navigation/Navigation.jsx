@@ -1,33 +1,16 @@
-import { NavLink, Outlet } from 'react-router-dom';
-import styled from 'styled-components';
+import { Outlet } from 'react-router-dom';
+
 import { Container } from '../Container';
 
-const Nav = styled.nav`
-  text-align: center;
-  border-bottom: 2px solid black;
-  padding-top: 20px;
-  padding-bottom: 20px;
-`;
-
-const NavigationLink = styled(NavLink)`
-  padding: 10px 15px;
-  margin-right: 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  color: black;
-  border: 1px solid black;
-  &.active {
-    color: aqua;
-    border: 1px solid aqua;
-  }
-`;
+import { Nav, NavigationLink } from './Navigation.styled';
+import { routes } from '../../routes';
 
 export const Layout = () => {
   return (
     <>
       <Nav>
-        <NavigationLink to="/">Home</NavigationLink>
-        <NavigationLink to="/movies">Movies</NavigationLink>
+        <NavigationLink to={routes.home}>Home</NavigationLink>
+        <NavigationLink to={routes.movies}>Movies</NavigationLink>
       </Nav>
 
       <Container>

@@ -3,6 +3,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './Components/Navigation';
 import { LoaderSimbol } from './Components/Loader';
 
+import { routes } from './routes';
+
 const HomePage = lazy(() => import('./Pages/HomePage/HomePage'));
 const MoviesPage = lazy(() => import('./Pages/MoviePage/MoviesPage'));
 const MovieDetailsPage = lazy(() =>
@@ -16,13 +18,13 @@ export default function App() {
     <>
       <Suspense fallback={<LoaderSimbol />}>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path={routes.home} element={<Layout />}>
             <Route index element={<HomePage />} />
 
-            <Route path="movies" element={<MoviesPage />} />
-            <Route path="movies/:moviesId" element={<MovieDetailsPage />}>
-              <Route path="cast" element={<Cast />} />
-              <Route path="reviews" element={<Reviews />} />
+            <Route path={routes.movies} element={<MoviesPage />} />
+            <Route path={routes.moviesDetails} element={<MovieDetailsPage />}>
+              <Route path={routes.cast} element={<Cast />} />
+              <Route path={routes.reviews} element={<Reviews />} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace={true} />} />
           </Route>

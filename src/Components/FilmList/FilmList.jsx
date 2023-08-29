@@ -25,7 +25,7 @@ const FilmList = ({ films }) => {
                     ? `https://image.tmdb.org/t/p/w300${backdrop_path}`
                     : `https://ik.imagekit.io/tc8jxffbcvf/default-movie-portrait_EmJUj9Tda5wa.jpg?tr=fo-auto,di-`
                 }
-                alt=""
+                alt={title ? title : name}
               />
 
               <FilmText>Vote: {vote_count}</FilmText>

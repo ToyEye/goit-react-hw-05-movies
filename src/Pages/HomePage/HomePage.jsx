@@ -3,7 +3,7 @@ import { fetchMain } from '../../Services-API';
 
 import FilmList from '../../Components/FilmList/FilmList';
 
-import { FilmListStyled, MainTitle } from '../../Components/Components/';
+import { MainTitle } from '../../Components/Components/';
 
 export default function HomePage() {
   const [films, setFilms] = useState([]);
@@ -18,9 +18,8 @@ export default function HomePage() {
   return (
     <article>
       <MainTitle>Trending today</MainTitle>
-      <FilmListStyled>
-        <FilmList films={films} />
-      </FilmListStyled>
+
+      <FilmList films={films} />
     </article>
   );
 }

@@ -8,10 +8,13 @@ const MainTitle = styled.h1`
 `;
 
 const FilmListStyled = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  justify-items: center;
+  grid-gap: 20px;
 `;
+
 const LinkStyled = styled(Link)`
   color: black;
   text-decoration: none;
@@ -19,18 +22,18 @@ const LinkStyled = styled(Link)`
 
 const FilmItem = styled.li`
   height: 300px;
-  margin-bottom: 15px;
+
   width: 350px;
   transform: scale(1);
   transition: transform 250ms linear;
   text-align: center;
   box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
 
-  :hover,
-  :focus {
+  &:is(:hover, :focus) {
     transform: scale(1.03);
   }
 `;
+
 const FilmText = styled.p`
   margin-top: 10px;
   margin-bottom: 10px;
