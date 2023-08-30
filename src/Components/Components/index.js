@@ -8,4 +8,5 @@ export {
   MainTitle,
   Button,
   LinkStyled,
+  Attention,
 } from './Components.styled';

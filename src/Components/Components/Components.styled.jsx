@@ -38,6 +38,7 @@ const FilmItem = styled.li`
 const FilmText = styled.p`
   margin-top: 10px;
   margin-bottom: 10px;
+  color: white;
 `;
 
 const FilmImages = styled.img`
@@ -72,6 +73,14 @@ const Button = styled.button`
   }
 `;
 
+const Attention = styled.div`
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
 export {
   FilmListStyled,
   FilmItem,
@@ -82,4 +91,5 @@ export {
   Button,
   MainTitle,
   LinkStyled,
+  Attention,
 };
