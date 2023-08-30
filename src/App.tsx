@@ -7,8 +7,8 @@ import { routes } from './routes';
 
 const HomePage = lazy(() => import('./Pages/HomePage/HomePage'));
 const MoviesPage = lazy(() => import('./Pages/MoviePage/MoviesPage'));
-const MovieDetailsPage = lazy(() =>
-  import('./Pages/MovieDetailsPage/MovieDetailsPage')
+const MovieDetailsPage = lazy(
+  () => import('./Pages/MovieDetailsPage/MovieDetailsPage')
 );
 const Cast = lazy(() => import('./Components/Cast/Cast'));
 const Reviews = lazy(() => import('./Components/Reviews'));

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Outlet, useSearchParams } from 'react-router-dom';
+
 import { fetchSearchFilm } from '../../Services-API';
 import Form from '../../Components/Form/Form';
 import FilmList from '../../Components/FilmList/FilmList';
@@ -27,7 +28,7 @@ export default function MoviesPage() {
     searchFilm();
   }, [searchParams]);
 
-  const handleFormSubmit = handleSearch => {
+  const handleFormSubmit = (handleSearch: string) => {
     setSearchParams({ query: handleSearch });
   };
 

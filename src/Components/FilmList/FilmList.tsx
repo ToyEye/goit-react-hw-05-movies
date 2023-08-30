@@ -6,9 +6,22 @@ import {
   FilmText,
   FilmImages,
   LinkStyled,
-} from '../../Components/Components/';
+} from '../Components';
 
-const FilmList = ({ films }) => {
+type TMovies = {
+  id: string;
+  title: string;
+  name: string;
+  backdrop_path: string;
+  vote_count: string;
+  vote_average: string;
+};
+
+type Props = {
+  films: TMovies[];
+};
+
+const FilmList = ({ films }: Props) => {
   const location = useLocation();
 
   return (

@@ -29,6 +29,7 @@ const FilmItem = styled.li`
   text-align: center;
   box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
 
+  background-color: #fff;
   &:is(:hover, :focus) {
     transform: scale(1.03);
   }
@@ -63,6 +64,8 @@ const Button = styled.button`
   border-radius: 5px;
   border: none;
   background-color: #fff;
+
+  cursor: pointer;
 
   &:active {
     scale: 0.9;

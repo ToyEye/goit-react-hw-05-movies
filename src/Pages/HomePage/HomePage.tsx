@@ -3,9 +3,9 @@ import { fetchMain } from '../../Services-API';
 
 import FilmList from '../../Components/FilmList/FilmList';
 
-import { MainTitle } from '../../Components/Components/';
+import { MainTitle } from '../../Components/Components';
 
-export default function HomePage() {
+const HomePage = () => {
   const [films, setFilms] = useState([]);
 
   useEffect(() => {
@@ -22,4 +22,6 @@ export default function HomePage() {
       <FilmList films={films} />
     </article>
   );
-}
+};
+
+export default HomePage;

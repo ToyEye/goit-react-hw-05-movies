@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { useParams, NavLink, Outlet, useLocation } from 'react-router-dom';
+
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { fetchMovieDetails } from '../../Services-API';
 import {
   Section,
@@ -12,26 +12,25 @@ import {
   GenresTitle,
   GenresList,
   GenresItem,
+  Links,
 } from './MovieDetailsPage.styled';
 
-const Links = styled(NavLink)`
-  text-decoration: none;
-  border: 1px solid black;
-  padding: 10px 40px;
-  color: black;
-  font-weight: 500;
-  border-radius: 5px;
+type Film = {
+  title: string;
+  vote_average: number;
+  overview: string;
+  genres: [];
+  poster_path: string;
+};
 
-  &.activ {
-    color: aqua;
-  }
-  :nth-child(1) {
-    margin-right: 15px;
-  }
-`;
-
-export default function MovieDetailsPage() {
-  const [oneFilmObject, setOneFilmObject] = useState({});
+const MovieDetailsPage = () => {
+  const [oneFilmObject, setOneFilmObject] = useState<Film>({
+    title: '',
+    vote_average: 0,
+    overview: '',
+    genres: [],
+    poster_path: '',
+  });
 
   let { moviesId } = useParams();
 
@@ -67,10 +66,10 @@ export default function MovieDetailsPage() {
           <Paragraph>{overview}</Paragraph>
           <GenresTitle>Genres</GenresTitle>
           <GenresList>
-            {genres &&
-              genres.map(({ name }) => (
-                <GenresItem key={name}>{name}</GenresItem>
-              ))}
+            {genres.length > 0 &&
+              genres.map(({ name }) => {
+                return <GenresItem key={name}>{name}</GenresItem>;
+              })}
           </GenresList>
         </OneFilmInfoContainer>
       </Section>
@@ -87,4 +86,6 @@ export default function MovieDetailsPage() {
       </Section>
     </>
   );
-}
+};
+
+export default MovieDetailsPage;

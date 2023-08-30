@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Section = styled.section`
@@ -8,15 +9,20 @@ const Section = styled.section`
 const OneFilmImg = styled.img`
   width: 400px;
 `;
+
 const FilmName = styled.h2`
   font-size: 26px;
   margin-top: 20px;
   margin-bottom: 10px;
 `;
+
 const OneFilmInfoContainer = styled.div`
-  margin-right: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
   margin-left: 15px;
+  background-color: #fff;
 `;
+
 const Paragraph = styled.div`
   margin-bottom: 15px;
 `;
@@ -38,6 +44,23 @@ const GenresItem = styled.li`
   margin-right: 7px;
 `;
 
+const Links = styled(NavLink)`
+  text-decoration: none;
+  border: 1px solid white;
+  padding: 10px 40px;
+  color: white;
+  font-weight: 500;
+  border-radius: 5px;
+
+  &.active {
+    color: aqua;
+    border-color: aqua;
+  }
+  &:nth-child(1) {
+    margin-right: 15px;
+  }
+`;
+
 export {
   Section,
   OneFilmImg,
@@ -45,6 +68,7 @@ export {
   OneFilmInfoContainer,
   Paragraph,
   AboutTitle,
+  Links,
   GenresTitle,
   GenresList,
   GenresItem,
